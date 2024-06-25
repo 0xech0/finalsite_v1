@@ -6,7 +6,7 @@ export const mintText = [
 ];
 
 //header image in the ui. replace with your own
-export const image = "https://raw.githubusercontent.com/0xech0/minting-site/main/_0015_1.png";
+export const image = "https://raw.githubusercontent.com/0xech0/finalsite_v1/main/aura.gif";
 
 //website title
 export const headerText = "MILADY AURA THREE";

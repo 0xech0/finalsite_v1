@@ -202,7 +202,7 @@ export default function Home() {
       <Box bg="black" minHeight="100vh" color="white" p={8}>
         <Flex justifyContent="space-between" alignItems="center" mb={8}>
           <VStack align="flex-start" spacing={1}>
-            <Heading size="2xl" fontWeight="normal">{headerText.toLowerCase()}</Heading>
+            <Heading size="2xl" fontWeight="normal">{headerText}</Heading>
             {!loading && (
               <Text fontSize="lg">
                 {Number(candyMachine?.itemsRedeemed)}/{Number(candyMachine?.data.itemsAvailable)} MINTED
@@ -212,7 +212,7 @@ export default function Home() {
           <WalletMultiButtonDynamic />
         </Flex>
         
-        <Flex direction={["column", "row"]} alignItems="flex-start" justifyContent="space-between" maxWidth="1200px" margin="0 auto">
+        <Flex direction={["column", "row"]} alignItems="flex-start" justifyContent="space-between" maxWidth="1000px" margin="0 auto">
           <Box width={["100%", "50%"]} mb={[8, 0]}>
             <Image src={image} alt={headerText} width="100%" />
           </Box>

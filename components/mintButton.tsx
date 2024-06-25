@@ -539,34 +539,36 @@ export function ButtonList({
     };
     buttonGuardList.push(buttonElement);
   }
-  const listItems = buttonGuardList.map((buttonGuard, index) => (
-    <Box key={index} width="100%" mb={8}>
-      <Text fontSize="xl" fontWeight="bold" mb={2}>{buttonGuard.header}</Text>
-      <Text fontSize="sm" mb={4}>
-        {calculateCost(buttonGuard, numberInputValues[buttonGuard.label] || 1)}
-      </Text>
-      <Flex justifyContent="space-between" alignItems="center" mb={4}>
-        <NumberInput
-          value={numberInputValues[buttonGuard.label] || 1}
-          min={1}
-          max={buttonGuard.maxAmount < 1 ? 1 : buttonGuard.maxAmount}
-          size="sm"
-          maxW="80px"
-          isDisabled={!buttonGuard.allowed}
-          onChange={(valueAsString, valueAsNumber) =>
-            handleNumberInputChange(buttonGuard.label, valueAsNumber)
-          }
-        >
-          <NumberInputField />
-          <NumberInputStepper>
-            <NumberIncrementStepper />
-            <NumberDecrementStepper />
-          </NumberInputStepper>
-        </NumberInput>
-      </Flex>
-      <Button
-        onClick={() =>
-          mintClick(
+  const listItems = buttonGuardList.map((buttonGuard, index) => {
+    const text = mintText.find((elem) => elem.label === buttonGuard.label);
+    
+    return (
+      <Box key={index} width="100%" mb={4} border="1px solid white" p={4} borderRadius="md">
+        <Text fontSize="xl" fontWeight="bold" mb={2}>{buttonGuard.header}</Text>
+        <Text fontSize="sm" mb={4}>
+          {calculateCost(buttonGuard, numberInputValues[buttonGuard.label] || 1)}
+        </Text>
+        <Flex justifyContent="flex-start" alignItems="center" mb={4} border="1px solid white">
+          <NumberInput
+            value={numberInputValues[buttonGuard.label] || 1}
+            min={1}
+            max={buttonGuard.maxAmount < 1 ? 1 : buttonGuard.maxAmount}
+            size="lg"
+            width="100%"
+            isDisabled={!buttonGuard.allowed}
+            onChange={(valueAsString, valueAsNumber) =>
+              handleNumberInputChange(buttonGuard.label, valueAsNumber)
+            }
+          >
+            <NumberInputField textAlign="center" />
+            <NumberInputStepper>
+              <NumberIncrementStepper />
+              <NumberDecrementStepper />
+            </NumberInputStepper>
+          </NumberInput>
+        </Flex>
+        <Button
+          onClick={() => mintClick(
             umi,
             buttonGuard,
             candyMachine,
@@ -579,18 +581,21 @@ export function ButtonList({
             setGuardList,
             onOpen,
             setCheckEligibility
-          )
-        }
-        isDisabled={!buttonGuard.allowed}
-        isLoading={guardList.find((elem) => elem.label === buttonGuard.label)?.minting}
-        loadingText={guardList.find((elem) => elem.label === buttonGuard.label)?.loadingText}
-        size="md"
-        width="100%"
-      >
-        {buttonGuard.buttonLabel}
-      </Button>
-    </Box>
-  ));
+          )}
+          isDisabled={!buttonGuard.allowed}
+          isLoading={guardList.find((elem) => elem.label === buttonGuard.label)?.minting}
+          loadingText={guardList.find((elem) => elem.label === buttonGuard.label)?.loadingText}
+          size="lg"
+          width="100%"
+          bg="white"
+          color="black"
+          _hover={{ bg: "gray.200" }}
+        >
+          MINT
+        </Button>
+      </Box>
+    );
+  });
 
   return <VStack align="stretch" spacing={8} width="100%">{listItems}</VStack>;
 }
